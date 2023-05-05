@@ -20,6 +20,7 @@
         <json.version>20230227</json.version>
         <lombok.version>1.18.26</lombok.version>
         <assertj-core.version>3.24.2</assertj-core.version>
+        <owner.version>1.0.12</owner.version>
     </properties>
 
     <dependencies>
@@ -62,6 +63,11 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>${owner.version}</version>
         </dependency>
     </dependencies>
 </project>

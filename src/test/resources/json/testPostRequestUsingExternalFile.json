@@ -1,0 +1,29 @@
+{
+  "id": "uid",
+  "firstName": "fname",
+  "lastName": "lname",
+  "email": "mail",
+  "designation": "desig",
+  "marks": {
+    "english": [
+      25,
+      32
+    ],
+    "maths": [
+      42,
+      32
+    ]
+  },
+  "jobs": [
+    "QA",
+    "Lead"
+  ],
+  "food": {
+    "breakfast": "paratha",
+    "lunch": "dal-rice",
+    "dinner": [
+      "pav-bhaji",
+      "gulab jamun"
+    ]
+  }
+}

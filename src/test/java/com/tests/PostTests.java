@@ -1,10 +1,17 @@
 package com.tests;
 
+import com.constants.ConstantsWithSingleton;
 import com.pojo.Employee;
+import com.utils.APIUtils;
+import com.utils.DateTimeUtils;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
+
+import static com.constants.FrameworkConstants.*;
 import static com.utils.APIBuilders.buildRequestForPostCalls;
+import static com.utils.APIUtils.readJsonAndGetAsString;
 import static com.utils.RandomUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +26,42 @@ public class PostTests {
                 .build();
 
         Response response = buildRequestForPostCalls(employee, "/employees");
+
+        assertThat(response.getStatusCode()).isEqualTo(201);
+    }
+
+    @Test
+    void testPostRequestUsingExternalFile(Method method) {
+        String uid = String.valueOf(getId());
+        String fname = getName();
+        String resource = readJsonAndGetAsString(getRequestJsonFilePath() + method.getName() + ".json")
+                .replace("uid", uid)
+                .replace("fname", fname);
+
+        Response response = buildRequestForPostCalls(resource, "/employees");
+
+        response.prettyPrint();
+
+        APIUtils.storeDataAsJsonFile(getResponseJsonFilePath() + method.getName() + DateTimeUtils.generateDateTime() + ".json", response);
+
+        assertThat(response.getStatusCode()).isEqualTo(201);
+    }
+
+    @Test
+    void testPostRequestUsingExternalFileSingleton(Method method) {
+        String uid = String.valueOf(getId());
+        String fname = getName();
+        String resource = readJsonAndGetAsString(ConstantsWithSingleton.getInstance().getRequestJsonFilePath()
+                + method.getName() + ".json")
+                .replace("uid", uid)
+                .replace("fname", fname);
+
+        Response response = buildRequestForPostCalls(resource, "/employees");
+
+        response.prettyPrint();
+
+        APIUtils.storeDataAsJsonFile(ConstantsWithSingleton.getInstance().getResponseJsonFilePath()
+                + method.getName() + DateTimeUtils.generateDateTime() + ".json", response);
 
         assertThat(response.getStatusCode()).isEqualTo(201);
     }
