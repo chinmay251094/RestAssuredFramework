@@ -21,6 +21,8 @@
         <lombok.version>1.18.26</lombok.version>
         <assertj-core.version>3.24.2</assertj-core.version>
         <owner.version>1.0.12</owner.version>
+        <extentreports.version>5.0.9</extentreports.version>
+        <test-data-supplier.version>1.9.7</test-data-supplier.version>
     </properties>
 
     <dependencies>
@@ -68,6 +70,16 @@
             <groupId>org.aeonbits.owner</groupId>
             <artifactId>owner</artifactId>
             <version>${owner.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${extentreports.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.sskorol</groupId>
+            <artifactId>test-data-supplier</artifactId>
+            <version>${test-data-supplier.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -7,7 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public final class APIUtils {
-    private APIUtils() {}
+    private APIUtils() {
+    }
 
     @SneakyThrows
     public static String readJsonAndGetAsString(String filePath) {

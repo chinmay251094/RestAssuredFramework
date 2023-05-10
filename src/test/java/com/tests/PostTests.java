@@ -1,6 +1,9 @@
 package com.tests;
 
+import com.annotations.TestDescription;
 import com.constants.ConstantsWithSingleton;
+import com.enums.Author;
+import com.enums.Category;
 import com.pojo.Employee;
 import com.utils.APIUtils;
 import com.utils.DateTimeUtils;
@@ -17,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PostTests {
     @Test
+    @TestDescription(description = "To post a new employee", author = Author.CHINMAY, category = Category.SMOKE)
     void testPostCalls() {
         Employee employee = Employee.builder()
                 .setId(getId())
@@ -31,6 +35,7 @@ public class PostTests {
     }
 
     @Test
+    @TestDescription(description = "To post a new employee using external file", author = Author.CHINMAY, category = Category.SMOKE)
     void testPostRequestUsingExternalFile(Method method) {
         String uid = String.valueOf(getId());
         String fname = getName();
