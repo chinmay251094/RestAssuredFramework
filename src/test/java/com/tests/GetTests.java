@@ -16,11 +16,10 @@ public class GetTests {
     @TestDescription(description = "To get all employee details", author = Author.CHINMAY, category = Category.SMOKE)
     void testGetEmployeeDetails() {
         Response response = buildRequestForGetCalls()
-                .baseUri("http://localhost:3000")
                 .get("/employees");
 
         response.prettyPrint();
-        Logger.logResponse(response.prettyPrint());
+        Logger.logResponse(response);
 
         assertThat(response.getStatusCode()).isEqualTo(200)
                 .isNotEqualTo(201);

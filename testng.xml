@@ -7,11 +7,11 @@
     </listeners>
     <test name="API-Testing" parallel="methods" thread-count="5">
         <classes>
-            <class name="com.tests.GetTests">
-                <methods>
-                    <include name="testGetEmployeeDetails"/>
-                </methods>
-            </class>
+           <class name="com.tests.PostTests">
+               <methods>
+                   <include name="testPostRequestUsingExternalFileSingleton"/>
+               </methods>
+           </class>
         </classes>
     </test>
 </suite>

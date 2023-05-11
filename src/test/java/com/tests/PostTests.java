@@ -8,11 +8,15 @@ import com.pojo.Employee;
 import com.utils.APIUtils;
 import com.utils.DateTimeUtils;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 
-import static com.constants.FrameworkConstants.*;
+import static com.constants.FrameworkConstants.getRequestJsonFilePath;
+import static com.constants.FrameworkConstants.getResponseJsonFilePath;
+import static com.reports.Logger.logRequest;
+import static com.reports.Logger.logResponse;
 import static com.utils.APIBuilders.buildRequestForPostCalls;
 import static com.utils.APIUtils.readJsonAndGetAsString;
 import static com.utils.RandomUtils.*;
@@ -29,7 +33,7 @@ public class PostTests {
                 .setCity(getCity())
                 .build();
 
-        Response response = buildRequestForPostCalls(employee, "/employees");
+        Response response = buildRequestForPostCalls().body(employee).post("/employees");
 
         assertThat(response.getStatusCode()).isEqualTo(201);
     }
@@ -43,7 +47,9 @@ public class PostTests {
                 .replace("uid", uid)
                 .replace("fname", fname);
 
-        Response response = buildRequestForPostCalls(resource, "/employees");
+        RequestSpecification requestSpecification = buildRequestForPostCalls().body(resource);
+
+        Response response = requestSpecification.post("/employees");
 
         response.prettyPrint();
 
@@ -53,6 +59,7 @@ public class PostTests {
     }
 
     @Test
+    @TestDescription(description = "To post a new employee using external file", author = Author.CHINMAY, category = Category.SMOKE)
     void testPostRequestUsingExternalFileSingleton(Method method) {
         String uid = String.valueOf(getId());
         String fname = getName();
@@ -61,8 +68,10 @@ public class PostTests {
                 .replace("uid", uid)
                 .replace("fname", fname);
 
-        Response response = buildRequestForPostCalls(resource, "/employees");
-
+        RequestSpecification requestSpecification = buildRequestForPostCalls().body(resource);
+        Response response = requestSpecification.post("/employees");
+        logRequest(requestSpecification);
+        logResponse(response);
         response.prettyPrint();
 
         APIUtils.storeDataAsJsonFile(ConstantsWithSingleton.getInstance().getResponseJsonFilePath()

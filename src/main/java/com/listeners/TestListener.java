@@ -7,11 +7,15 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.enums.Author;
 import com.enums.Category;
 import com.reports.Reports;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import lombok.SneakyThrows;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -21,6 +25,8 @@ import static com.reports.Logger.*;
 import static com.reports.Reports.*;
 
 public class TestListener implements ITestListener, ISuiteListener {
+    private static final String errorNoDescription = "Test Description must not be null or empty";
+
     @Override
     @SneakyThrows
     public void onStart(ISuite suite) {
@@ -50,9 +56,6 @@ public class TestListener implements ITestListener, ISuiteListener {
 
         info(ICON_AUTHOR + " Author(s): " + "<b>" + getAuthorList(authors) + "</b>");
         info(ICON_CATEGORY + " Category: " + "<b>" + getCategoryList(categories) + "</b>");
-//        Reports.createTests(result.getMethod().getDescription());
-//        Reports.addAuthors(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TestDescription.class).author());
-//        Reports.addCategory(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(TestDescription.class).category());
     }
 
     @Override
@@ -68,7 +71,7 @@ public class TestListener implements ITestListener, ISuiteListener {
                 Markup markup_message = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
                 pass(markup_message);
             } else {
-                throw new IllegalArgumentException("Test Description must not be null or empty");
+                throw new IllegalArgumentException(errorNoDescription);
             }
         }
     }
@@ -98,7 +101,7 @@ public class TestListener implements ITestListener, ISuiteListener {
                     ex.printStackTrace();
                 }
             } else {
-                throw new IllegalArgumentException("Test Description must not be null or empty");
+                throw new IllegalArgumentException(errorNoDescription);
             }
         }
     }
@@ -118,7 +121,7 @@ public class TestListener implements ITestListener, ISuiteListener {
                 Markup markup_message = MarkupHelper.createLabel(logText, ExtentColor.YELLOW);
                 skip(markup_message);
             } else {
-                throw new IllegalArgumentException("Test Description must not be null or empty");
+                throw new IllegalArgumentException(errorNoDescription);
             }
         }
     }

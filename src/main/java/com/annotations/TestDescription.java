@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface  TestDescription {
+public @interface TestDescription {
     /**
      * Returns a description of the test method.
      *
