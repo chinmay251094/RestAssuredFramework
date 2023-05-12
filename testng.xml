@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite1">
     <listeners>
-        <!--<listener class-name="com.listeners.TestInterceptor"/>-->
+        <listener class-name="com.listeners.TestInterceptor"/>
         <listener class-name="com.listeners.TestListener"/>
     </listeners>
     <test name="API-Testing" parallel="methods" thread-count="5">
@@ -10,6 +10,7 @@
            <class name="com.tests.PostTests">
                <methods>
                    <include name="testPostRequestUsingExternalFileSingleton"/>
+                   <include name="testPostCalls"/>
                </methods>
            </class>
         </classes>

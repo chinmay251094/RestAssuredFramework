@@ -18,4 +18,12 @@ public final class APIBuilders {
     public static RequestSpecification buildRequestForPostCalls() {
         return buildRequestForGetCalls().contentType(ContentType.JSON);
     }
+
+    public static RequestSpecification buildRequestForPutCalls() {
+        return buildRequestForGetCalls().contentType(ContentType.JSON);
+    }
+
+    public static RequestSpecification buildRequestForDeleteCalls() {
+        return buildRequestForGetCalls();
+    }
 }
